@@ -1,0 +1,48 @@
+# 1. Image de base légère
+FROM debian:bullseye-slim
+
+# 2. Variables d'environnement
+ENV STEAMCMD_DIR="/home/steam/steamcmd" \
+    SERVER_DIR="/home/steam/necesse_server" \
+    NECESSE_APPID="1169370" \
+    USER="steam"
+
+# 3. Installation, configuration, SteamCMD et Necesse en un seul RUN
+RUN dpkg --add-architecture i386 \
+    # Mise à jour et installation des dépendances (lib32gcc-s1 pour SteamCMD)
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        lib32gcc-s1 \
+        curl \
+        ca-certificates \
+        # Ajout de 'wget' ou 'unzip' si nécessaire pour d'autres opérations
+    # Création de l'utilisateur 'steam' (non-root pour la sécurité)
+    && useradd -ms /bin/bash ${USER} \
+    && mkdir -p ${STEAMCMD_DIR} \
+    && mkdir -p ${SERVER_DIR} \
+    && chown -R ${USER}:${USER} /home/${USER} \
+    # Nettoyage pour réduire la taille de la couche
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Passage à l'utilisateur non-root
+USER ${USER}
+WORKDIR /home/${USER}
+
+# 4. Téléchargement et installation de SteamCMD et du serveur Necesse en un seul RUN
+RUN set -x \
+    # Téléchargement et extraction de SteamCMD
+    && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar xz -C ${STEAMCMD_DIR} \
+    # Téléchargement et installation du serveur Necesse (commande SteamCMD chaînée)
+    && ${STEAMCMD_DIR}/steamcmd.sh +force_install_dir ${SERVER_DIR} +login anonymous +app_update ${NECESSE_APPID} validate +quit
+
+# 5. Création et droits du script de démarrage
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# 6. Exposition des ports
+EXPOSE 14100/tcp
+EXPOSE 14100/udp
+
+# 7. Démarrage du conteneur
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
