@@ -28,3 +28,10 @@ services:
     # Vous pouvez décommenter et ajuster 'command' pour passer des arguments spécifiques au serveur Necesse
     # La variable "$@" dans run.sh assurera qu'ils sont transmis au script de lancement final.
     # command: -port 14100 -world "MonSuperMonde"
+    # AJOUTER UNE COMMANDE POUR LA CONFIGURATION DU SERVEUR
+    # Ces arguments seront passés à la variable "$@" dans le script run.sh
+    command: 
+      - -world "MonSuperMonde"
+      - -port 14100
+      - -players 10
+      - -difficulty 1 # (1 = Casual, 2 = Normal, 3 = Hardcore)
