@@ -1,7 +1,7 @@
 services:
   necesse_server:
     # Utilisez 'image:' au lieu de 'build:' pour tirer directement l'image
-    image: votre-utilisateur-docker/necesse-server:latest
+    image: benjiteck/necesse-docker-server:0.1
     
     container_name: necesse-dedicated-server
     
