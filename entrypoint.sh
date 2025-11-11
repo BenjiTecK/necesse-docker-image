@@ -5,7 +5,7 @@ set -e
 STEAMCMD_BIN="/home/steam/steamcmd/steamcmd.sh" 
 SERVER_DIR="/home/steam/necesse_server"
 NECESSE_APPID="1169370"
-NECESSE_JAR="Server.jar"
+NECESSE_JAR="server.jar"
 
 echo "=========================================="
 echo "      Serveur Necesse Démarrage Unifié     "
