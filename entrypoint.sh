@@ -19,11 +19,11 @@ echo "-> Vérification et mise à jour du serveur Necesse (AppID: $NECESSE_APPID
 echo "-> Mise à jour terminée."
 
 # 2. Lancement du Serveur
-echo "-> Lancement du serveur Necesse via StartServer.sh..."
+echo "-> Lancement du serveur Necesse via StartServer-nogui.sh..."
 
 # Se positionner dans le répertoire pour que le script trouve correctement son JRE interne et ses dépendances
 cd "${SERVER_DIR}"
 
 # Exécuter le script de démarrage fourni par le jeu.
 # "$@" passe tous les arguments reçus (via docker compose command:) au script StartServer.sh.
-exec bash StartServer.sh "$@"
+exec bash StartServer-nogui.sh "$@"
