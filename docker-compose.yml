@@ -1,0 +1,30 @@
+services:
+  necesse_server:
+    # Utilisez 'image:' au lieu de 'build:' pour tirer directement l'image
+    image: votre-utilisateur-docker/necesse-server:latest
+    
+    container_name: necesse-dedicated-server
+    
+    # Redémarrer automatiquement en cas d'arrêt, sauf si arrêté manuellement
+    restart: unless-stopped 
+    
+    ports:
+      # Format: <Port Hôte>:<Port Conteneur>/<Protocole>
+      - "14100:14100/tcp"
+      - "14100:14100/udp"
+      
+    volumes:
+      # CRUCIAL : Assure la persistance des sauvegardes. 
+      # Mappe le dossier de données hôte (./necesse-data) au dossier de jeu du conteneur.
+      # Le dossier ./necesse-data doit exister sur votre hôte.
+      - ./necesse-data:/home/steam/necesse_server
+      
+    environment:
+      # Ces variables sont optionnelles avec l'image cm2network/steamcmd, 
+      # mais peuvent aider à garantir les permissions sur l'hôte.
+      - PUID=1000 # User ID (UID)
+      - PGID=1000 # Group ID (GID)
+      
+    # Vous pouvez décommenter et ajuster 'command' pour passer des arguments spécifiques au serveur Necesse
+    # La variable "$@" dans run.sh assurera qu'ils sont transmis au script de lancement final.
+    # command: -port 14100 -world "MonSuperMonde"
