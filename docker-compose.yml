@@ -35,5 +35,5 @@ services:
       - -port 14100
       - -players 10
       - -difficulty 1 # (1 = Casual, 2 = Normal, 3 = Hardcore)
-Volumes:
+volumes:
   necesse-data:
