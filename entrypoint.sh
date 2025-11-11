@@ -3,7 +3,7 @@ set -e
 
 # --- Variables de configuration du serveur ---
 STEAMCMD_BIN="/home/steam/steamcmd/steamcmd.sh" 
-SERVER_DIR="/home/steam/necesse_server"
+SERVER_DIR="/home/steam/necesse_server/"
 NECESSE_APPID="1169370"
 # NecesseServer.jar n'est plus utilisé directement, mais nous gardons les chemins.
 
@@ -22,7 +22,7 @@ echo "-> Mise à jour terminée."
 echo "-> Lancement du serveur Necesse via StartServer-nogui.sh..."
 
 # Se positionner dans le répertoire pour que le script trouve correctement son JRE interne et ses dépendances
-cd "${SERVER_DIR}"
+cd "/home/steam/necesse_server/"
 
 chmod +x StartServer-nogui.sh
 
