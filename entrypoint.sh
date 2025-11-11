@@ -24,6 +24,8 @@ echo "-> Lancement du serveur Necesse via StartServer-nogui.sh..."
 # Se positionner dans le répertoire pour que le script trouve correctement son JRE interne et ses dépendances
 cd "${SERVER_DIR}"
 
+chmod +x StartServer-nogui.sh
+
 # Exécuter le script de démarrage fourni par le jeu.
 # "$@" passe tous les arguments reçus (via docker compose command:) au script StartServer.sh.
 exec bash StartServer-nogui.sh "$@"
