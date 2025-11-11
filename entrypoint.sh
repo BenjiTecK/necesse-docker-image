@@ -22,7 +22,7 @@ echo "-> Mise à jour terminée."
 echo "-> Lancement du serveur Necesse via StartServer-nogui.sh..."
 
 # Se positionner dans le répertoire pour que le script trouve correctement son JRE interne et ses dépendances
-cd "/home/steam/necesse_server/"
+cd "${SERVER_DIR}"
 
 chmod +x StartServer-nogui.sh
 
