@@ -17,7 +17,7 @@ services:
       # CRUCIAL : Assure la persistance des sauvegardes. 
       # Mappe le dossier de données hôte (./necesse-data) au dossier de jeu du conteneur.
       # Le dossier ./necesse-data doit exister sur votre hôte.
-      - ./necesse-data:/home/steam/necesse_server
+      - necesse-data:/home/steam/necesse_server
       
     environment:
       # Ces variables sont optionnelles avec l'image cm2network/steamcmd, 
@@ -35,3 +35,5 @@ services:
       - -port 14100
       - -players 10
       - -difficulty 1 # (1 = Casual, 2 = Normal, 3 = Hardcore)
+Volumes:
+  necesse-data:
