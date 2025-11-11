@@ -22,9 +22,13 @@ RUN if ! id "steam" >/dev/null 2>&1; then \
     && chown -R 1000:1000 /home/steam
 
 # 3. Installation Initiale du Serveur Necesse
+#USER steam 
+#RUN mkdir -p ${SERVER_DIR} \
+#    && /home/steam/steamcmd/steamcmd.sh +force_install_dir ${SERVER_DIR} +login anonymous +app_update ${NECESSE_APPID} validate +quit
+
+# 3. NOUVELLE ÉTAPE : Créer le répertoire (même si le volume le monte, c'est une bonne pratique)
 USER steam 
-RUN mkdir -p ${SERVER_DIR} \
-    && /home/steam/steamcmd/steamcmd.sh +force_install_dir ${SERVER_DIR} +login anonymous +app_update ${NECESSE_APPID} validate +quit
+RUN mkdir -p ${SERVER_DIR}
 
 # 4. Ajout et Permissions du script
 USER root
