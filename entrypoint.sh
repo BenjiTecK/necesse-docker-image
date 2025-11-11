@@ -29,5 +29,5 @@ echo "-> dans le répertoire necesse_server"
 chmod +x StartServer-nogui.sh
 
 # Exécuter le script de démarrage fourni par le jeu.
-# "$@" passe tous les arguments reçus (via docker compose command:) au script StartServer.sh.
+# "$@" passe tous les arguments reçus (via docker compose command:) au script StartServer-nogui.sh.
 exec bash StartServer-nogui.sh "$@"
